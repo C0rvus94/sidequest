@@ -48,11 +48,6 @@
         outline: none;
     }
 
-    .file-input {
-        margin-top: 10px;
-        color: #7ab8ff;
-    }
-
     .btn {
         display: block;
         margin-top: 20px;
@@ -63,7 +58,6 @@
         color: #7ab8ff;
         font-size: 22px;
         font-weight: 600;
-        text-decoration: none;
         cursor: pointer;
         transition: 0.2s;
         box-shadow: 0 0 15px #1e90ff;
@@ -72,7 +66,6 @@
     .btn:hover {
         background: rgba(30, 144, 255, 0.4);
         transform: scale(1.05);
-        box-shadow: 0 0 25px #4aa3ff;
     }
 </style>
 </head>
@@ -86,7 +79,7 @@
     <input id="password" type="password" placeholder="Password">
 
     <label style="font-size: 18px;">Profile Picture:</label>
-    <input id="pfp" class="file-input" type="file" accept="image/*">
+    <input id="pfp" type="file" accept="image/*">
 
     <button class="btn" onclick="createAccount()">Create Account</button>
 </div>
@@ -97,7 +90,7 @@ function createAccount() {
     const pfpFile = document.getElementById("pfp").files[0];
 
     if (!firstName || !pfpFile) {
-        alert("Please enter your first name and choose a profile picture.");
+        alert("Enter your name and choose a profile picture.");
         return;
     }
 
@@ -105,6 +98,8 @@ function createAccount() {
     reader.onload = function(e) {
         localStorage.setItem("firstName", firstName);
         localStorage.setItem("pfp", e.target.result);
+        localStorage.setItem("xp", 0);
+        localStorage.setItem("currentQuest", "No quest selected.");
         window.location.href = "start.html";
     };
     reader.readAsDataURL(pfpFile);
@@ -113,4 +108,5 @@ function createAccount() {
 
 </body>
 </html>
+
 
