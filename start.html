@@ -40,13 +40,7 @@
         position: absolute;
         inset: -10px;
         border-radius: 50%;
-        background: conic-gradient(
-            #1e90ff,
-            #4aa3ff,
-            #7ab8ff,
-            #4aa3ff,
-            #1e90ff
-        );
+        background: conic-gradient(#1e90ff, #4aa3ff, #7ab8ff, #4aa3ff, #1e90ff);
         animation: spin 4s linear infinite;
         filter: blur(8px);
     }
@@ -76,17 +70,17 @@
 </div>
 
 <script>
-    // Load saved data
+window.onload = () => {
     const name = localStorage.getItem("firstName");
     const pfp = localStorage.getItem("pfp");
 
     document.getElementById("welcomeText").innerText = "Welcome, " + name;
     document.getElementById("pfpImage").src = pfp;
 
-    // After 3 seconds, go to home screen
     setTimeout(() => {
         window.location.href = "home.html";
-    }, 3000); // 3000ms = 3 seconds
+    }, 3000);
+};
 </script>
 
 </body>
