@@ -27,6 +27,8 @@
         flex-direction: column;
         padding-top: 40px;
         position: fixed;
+        left: 0;
+        top: 0;
     }
 
     .sidebar h2 {
@@ -92,6 +94,14 @@
         z-index: 2;
         object-fit: cover;
         border: 3px solid #1e90ff;
+        position: relative;
+    }
+
+    h1 {
+        font-size: 50px;
+        color: #7ab8ff;
+        text-shadow: 0 0 20px #1e90ff;
+        margin-bottom: 20px;
     }
 
     .box {
@@ -103,6 +113,12 @@
         border-radius: 12px;
         margin-left: auto;
         margin-right: auto;
+        box-shadow: 0 0 20px #1e90ff;
+    }
+
+    .box h2 {
+        margin-top: 0;
+        color: #7ab8ff;
     }
 
     .xp-bar {
@@ -119,6 +135,7 @@
         height: 100%;
         width: 0%;
         background: linear-gradient(90deg, #1e90ff, #7ab8ff);
+        box-shadow: 0 0 15px #1e90ff;
         transition: 0.4s;
     }
 </style>
@@ -145,7 +162,7 @@
 
     <div class="box">
         <h2>Current Quest</h2>
-        <p id="currentQuest"></p>
+        <p id="currentQuest">No quest selected.</p>
     </div>
 
     <div class="box">
@@ -153,27 +170,38 @@
         <div class="xp-bar">
             <div id="xpFill"></div>
         </div>
-        <p id="xpText"></p>
+        <p id="xpText">0 XP</p>
     </div>
 
 </div>
 
 <script>
-    const name = localStorage.getItem("firstName");
+window.onload = () => {
+    const name = localStorage.getItem("firstName") || "Player";
     const pfp = localStorage.getItem("pfp");
-    const quest = localStorage.getItem("currentQuest");
-    const xp = parseInt(localStorage.getItem("xp"));
+    const quest = localStorage.getItem("currentQuest") || "No quest selected.";
+    const xp = parseInt(localStorage.getItem("xp") || "0");
 
     document.getElementById("welcomeName").innerText = name + "'s Profile";
-    document.getElementById("pfpImage").src = pfp;
+
+    if (pfp) {
+        document.getElementById("pfpImage").src = pfp;
+    } else {
+        // fallback placeholder if no pfp saved
+        document.getElementById("pfpImage").src = "https://i.imgur.com/4ZQZ4Zy.png";
+    }
+
     document.getElementById("currentQuest").innerText = quest;
 
     document.getElementById("xpText").innerText = xp + " XP";
-    document.getElementById("xpFill").style.width = Math.min(xp, 100) + "%";
+    const percent = Math.max(0, Math.min(xp, 100));
+    document.getElementById("xpFill").style.width = percent + "%";
+};
 </script>
 
 </body>
 </html>
+
 
 
 
