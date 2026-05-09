@@ -13,27 +13,86 @@
         background: #05070a;
         font-family: 'Rajdhani', sans-serif;
         color: #d7e9ff;
-        text-align: center;
-        padding-top: 120px;
+        display: flex;
     }
 
-    h1 {
+    /* SIDEBAR */
+    .sidebar {
+        width: 230px;
+        height: 100vh;
+        background: rgba(10, 15, 25, 0.9);
+        border-right: 2px solid #1e90ff;
+        box-shadow: 0 0 25px #1e90ff;
+        display: flex;
+        flex-direction: column;
+        padding-top: 40px;
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
+
+    .sidebar h2 {
+        text-align: center;
+        color: #7ab8ff;
+        margin-bottom: 40px;
+        text-shadow: 0 0 15px #1e90ff;
+    }
+
+    .nav-btn {
+        padding: 18px;
+        margin: 10px 20px;
+        background: rgba(30, 144, 255, 0.15);
+        border: 2px solid #1e90ff;
+        border-radius: 10px;
+        color: #7ab8ff;
+        font-size: 22px;
+        font-weight: 600;
+        text-decoration: none;
+        text-align: center;
+        transition: 0.2s;
+        box-shadow: 0 0 15px #1e90ff;
+    }
+
+    .nav-btn:hover {
+        background: rgba(30, 144, 255, 0.35);
+        transform: scale(1.05);
+        box-shadow: 0 0 25px #4aa3ff;
+    }
+
+    /* MAIN CONTENT */
+    .content {
+        margin-left: 260px;
+        padding: 60px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .content h1 {
         font-size: 60px;
         color: #7ab8ff;
         text-shadow: 0 0 20px #1e90ff;
-        margin-bottom: 20px;
-    }
-
-    p {
-        font-size: 22px;
-        opacity: 0.8;
     }
 </style>
 </head>
 <body>
 
-<h1>Home Screen Loaded</h1>
-<p>Your site is working correctly.</p>
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>MENU</h2>
+
+    <a class="nav-btn" href="home.html">SideQuest</a>
+    <a class="nav-btn" href="progress.html">Progress</a>
+    <a class="nav-btn" href="upgrades.html">Upgrades</a>
+    <a class="nav-btn" href="social.html">Social</a>
+    <a class="nav-btn" href="settings.html">Settings</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+    <h1>Home Screen Loaded</h1>
+    <p>Welcome to your dashboard.</p>
+</div>
 
 </body>
 </html>
+
