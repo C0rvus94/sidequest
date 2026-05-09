@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SideQuest Creator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #05070a;
+        font-family: 'Rajdhani', sans-serif;
+        color: #d7e9ff;
+        display: flex;
+    }
+
+    .sidebar {
+        width: 230px;
+        height: 100vh;
+        background: rgba(10, 15, 25, 0.9);
+        border-right: 2px solid #1e90ff;
+        box-shadow: 0 0 25px #1e90ff;
+        display: flex;
+        flex-direction: column;
+        padding-top: 40px;
+        position: fixed;
+    }
+
+    .nav-btn {
+        padding: 18px;
+        margin: 10px 20px;
+        background: rgba(30, 144, 255, 0.15);
+        border: 2px solid #1e90ff;
+        border-radius: 10px;
+        color: #7ab8ff;
+        font-size: 22px;
+        text-decoration: none;
+        text-align: center;
+        transition: 0.2s;
+    }
+
+    .nav-btn:hover {
+        background: rgba(30, 144, 255, 0.35);
+        transform: scale(1.05);
+    }
+
+    .content {
+        margin-left: 260px;
+        padding: 40px;
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 50px;
+        color: #7ab8ff;
+        text-shadow: 0 0 20px #1e90ff;
+    }
+
+    .input-box {
+        width: 400px;
+        padding: 20px;
+        background: rgba(10, 15, 25, 0.85);
+        border: 2px solid #1e90ff;
+        border-radius: 12px;
+        margin-bottom: 30px;
+    }
+
+    input, select, textarea {
+        width: 90%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border: 2px solid #1e90ff;
+        background: #0a0f1a;
+        color: #d7e9ff;
+        font-size: 18px;
+    }
+
+    .btn {
+        padding: 12px;
+        background: rgba(30, 144, 255, 0.25);
+        border: 2px solid #1e90ff;
+        border-radius: 10px;
+        color: #7ab8ff;
+        font-size: 22px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+        width: 200px;
+        text-align: center;
+    }
+
+    .btn:hover {
+        background: rgba(30, 144, 255, 0.4);
+        transform: scale(1.05);
+    }
+
+    .quest-list {
+        margin-top: 30px;
+    }
+
+    .quest-item {
+        padding: 15px;
+        background: rgba(10, 15, 25, 0.85);
+        border: 2px solid #1e90ff;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        cursor: pointer;
+    }
+
+    .quest-item:hover {
+        background: rgba(30, 144, 255, 0.2);
+    }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+    <a class="nav-btn" href="home.html">Home</a>
+    <a class="nav-btn" href="sidequest.html">SideQuest</a>
+    <a class="nav-btn" href="progress.html">Progress</a>
+    <a class="nav-btn" href="upgrades.html">Upgrades</a>
+    <a class="nav-btn" href="social.html">Social</a>
+    <a class="nav-btn" href="settings.html">Settings</a>
+</div>
+
+<div class="content">
+    <h1>SideQuest Creator</h1>
+
+    <div class="input-box">
+        <input id="qTitle" type="text" placeholder="Quest Title">
+        <textarea id="qDesc" placeholder="Quest Description"></textarea>
+
+        <select id="qRarity">
+            <option value="Common">Common</option>
+            <option value="Uncommon">Uncommon</option>
+            <option value="Rare">Rare</option>
+            <option value="Epic">Epic</option>
+            <option value="Legendary">Legendary</option>
+        </select>
+
+        <input id="qPrize" type="text" placeholder="Prize (XP, coins, item, etc.)">
+
+        <button class="btn" onclick="addQuest()">Add Quest</button>
+    </div>
+
+    <h2>Your Quests</h2>
+    <div id="questList" class="quest-list"></div>
+</div>
+
+<script>
+function loadQuests() {
+    const quests = JSON.parse(localStorage.getItem("quests") || "[]");
+    const list = document.getElementById("questList");
+    list.innerHTML = "";
+
+    quests.forEach((q, index) => {
+        const div = document.createElement("div");
+        div.className = "quest-item";
+        div.innerHTML = `
+            <strong>${q.title}</strong> — ${q.rarity}<br>
+            <small>${q.prize}</small>
+        `;
+        div.onclick = () => {
+            localStorage.setItem("currentQuest", q.title + " (" + q.rarity + ")");
+            alert("Current quest set!");
+        };
+        list.appendChild(div);
+    });
+}
+
+function addQuest() {
+    const title = document.getElementById("qTitle").value;
+    const desc = document.getElementById("qDesc").value;
+    const rarity = document.getElementById("qRarity").value;
+    const prize = document.getElementById("qPrize").value;
+
+    if (!title || !desc || !prize) {
+        alert("Fill out all fields.");
+        return;
+    }
+
+    const quests = JSON.parse(localStorage.getItem("quests") || "[]");
+
+    quests.push({
+        title,
+        desc,
+        rarity,
+        prize
+    });
+
+    localStorage.setItem("quests", JSON.stringify(quests));
+
+    loadQuests();
+}
+
+loadQuests();
+</script>
+
+</body>
+</html>
