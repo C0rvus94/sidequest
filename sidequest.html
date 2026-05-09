@@ -1,145 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>SideQuest</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-<style>
-    body { margin:0; padding:0; background:#05070a; color:#d7e9ff; font-family:'Rajdhani',sans-serif; display:flex; }
-
-    .sidebar {
-        width:230px; height:100vh;
-        background:rgba(10,15,25,0.9);
-        border-right:2px solid #1e90ff;
-        box-shadow:0 0 25px #1e90ff;
-        padding-top:40px;
-        position:fixed;
-    }
-
-    .nav-btn {
-        padding:18px; margin:10px 20px;
-        background:rgba(30,144,255,0.15);
-        border:2px solid #1e90ff;
-        border-radius:10px;
-        color:#7ab8ff; font-size:22px;
-        text-decoration:none; display:block;
-        text-align:center; transition:0.2s;
-    }
-
-    .nav-btn:hover { background:rgba(30,144,255,0.35); transform:scale(1.05); }
-
-    .content {
-        margin-left:260px; padding:60px;
-        width:100%; text-align:center;
-    }
-
-    .section-title {
-        font-size:40px;
-        color:#7ab8ff;
-        text-shadow:0 0 20px #1e90ff;
-        margin-bottom:20px;
-    }
-
-    .quest-box {
-        padding:20px; width:400px;
-        background:rgba(10,15,25,0.85);
-        border:2px solid #1e90ff;
-        border-radius:12px;
-        margin:20px auto;
-        cursor:pointer;
-        transition:0.2s;
-    }
-
-    .quest-box:hover {
-        background:rgba(30,144,255,0.25);
-        transform:scale(1.03);
-    }
-
-    .input-box {
-        width:400px; padding:20px;
-        background:rgba(10,15,25,0.85);
-        border:2px solid #1e90ff;
-        border-radius:12px;
-        margin:30px auto;
-    }
-
-    input, textarea, select {
-        width:90%; padding:10px;
-        margin:10px 0;
-        border-radius:8px;
-        border:2px solid #1e90ff;
-        background:#0a0f1a;
-        color:#d7e9ff;
-        font-size:18px;
-    }
-
-    .btn {
-        padding:12px; width:200px;
-        background:rgba(30,144,255,0.25);
-        border:2px solid #1e90ff;
-        border-radius:10px;
-        color:#7ab8ff; font-size:22px;
-        font-weight:600; cursor:pointer;
-        transition:0.2s;
-    }
-
-    .btn:hover { background:rgba(30,144,255,0.4); transform:scale(1.05); }
-</style>
-</head>
-
-<body>
-
-<div class="sidebar">
-    <a class="nav-btn" href="home.html">Home</a>
-    <a class="nav-btn" href="sidequest.html">SideQuest</a>
-    <a class="nav-btn" href="progress.html">Progress</a>
-    <a class="nav-btn" href="upgrades.html">Upgrades</a>
-    <a class="nav-btn" href="social.html">Social</a>
-    <a class="nav-btn" href="settings.html">Settings</a>
-</div>
-
-<div class="content">
-
-    <h1 class="section-title">Daily Quests</h1>
-    <div id="dailyList"></div>
-
-    <h1 class="section-title">Your Custom Quests</h1>
-
-    <div class="input-box">
-        <input id="qTitle" type="text" placeholder="Quest Title">
-        <textarea id="qDesc" placeholder="Quest Description"></textarea>
-
-        <select id="qRarity">
-            <option value="Common">Common</option>
-            <option value="Uncommon">Uncommon</option>
-            <option value="Rare">Rare</option>
-            <option value="Epic">Epic</option>
-            <option value="Legendary">Legendary</option>
-        </select>
-
-        <input id="qPrize" type="text" placeholder="Prize (XP, coins, item, etc.)">
-
-        <button class="btn" onclick="addQuest()">Add Quest</button>
-    </div>
-
-    <div id="questList"></div>
-
-</div>
-
-<script>
-/* ---------------- DAILY QUEST SYSTEM ---------------- */
+/* ---------------- DAILY QUEST SYSTEM (UPGRADED) ---------------- */
 
 const QUEST_POOL = [
-    { title:"Touch grass", prize:"10 XP", rarity:"Common" },
-    { title:"Drink 2 bottles of water", prize:"15 XP", rarity:"Common" },
-    { title:"Clean your room", prize:"20 XP", rarity:"Uncommon" },
-    { title:"Do 20 pushups", prize:"25 XP", rarity:"Uncommon" },
-    { title:"Draw something", prize:"30 XP", rarity:"Rare" },
-    { title:"Talk to someone new", prize:"40 XP", rarity:"Rare" },
-    { title:"Go outside for 10 minutes", prize:"50 XP", rarity:"Epic" },
-    { title:"Do something kind", prize:"60 XP", rarity:"Legendary" }
+    { title:"Touch grass", prize:10, rarity:"Common" },
+    { title:"Drink 2 bottles of water", prize:15, rarity:"Common" },
+    { title:"Clean your room", prize:20, rarity:"Uncommon" },
+    { title:"Do 20 pushups", prize:25, rarity:"Uncommon" },
+    { title:"Draw something", prize:30, rarity:"Rare" },
+    { title:"Talk to someone new", prize:40, rarity:"Rare" },
+    { title:"Go outside for 10 minutes", prize:50, rarity:"Epic" },
+    { title:"Do something kind", prize:60, rarity:"Legendary" }
 ];
 
 function generateDailyQuests() {
@@ -177,69 +46,55 @@ function displayDailyQuests(quests) {
     const list = document.getElementById("dailyList");
     list.innerHTML = "";
 
-    quests.forEach(q => {
-        const div = document.createElement("div");
-        div.className = "quest-box";
-        div.innerHTML = `
-            <h2>${q.title}</h2>
-            <p>${q.rarity}</p>
-            <p>Prize: ${q.prize}</p>
-        `;
-        div.onclick = () => {
-            localStorage.setItem("currentQuest", q.title + " (" + q.rarity + ")");
-            alert("Current quest set!");
-        };
-        list.appendChild(div);
-    });
-}
-
-/* ---------------- CUSTOM QUEST SYSTEM ---------------- */
-
-function loadQuests() {
-    const quests = JSON.parse(localStorage.getItem("quests") || "[]");
-    const list = document.getElementById("questList");
-    list.innerHTML = "";
-
     quests.forEach((q, index) => {
         const div = document.createElement("div");
         div.className = "quest-box";
         div.innerHTML = `
             <h2>${q.title}</h2>
             <p>${q.rarity}</p>
-            <p>Prize: ${q.prize}</p>
+            <p>Reward: ${q.prize} XP</p>
+
+            <button class="btn" onclick="completeDaily(${index})">✓ Complete</button>
+            <button class="btn" onclick="rejectDaily(${index})">✗ Remove</button>
+
+            <div id="collect${index}" style="display:none; margin-top:10px;">
+                <button class="btn" onclick="collectReward(${index})">Collect Reward</button>
+            </div>
         `;
-        div.onclick = () => {
-            localStorage.setItem("currentQuest", q.title + " (" + q.rarity + ")");
-            alert("Current quest set!");
-        };
         list.appendChild(div);
     });
 }
 
-function addQuest() {
-    const title = document.getElementById("qTitle").value;
-    const desc = document.getElementById("qDesc").value;
-    const rarity = document.getElementById("qRarity").value;
-    const prize = document.getElementById("qPrize").value;
-
-    if (!title || !desc || !prize) {
-        alert("Fill out all fields.");
-        return;
-    }
-
-    const quests = JSON.parse(localStorage.getItem("quests") || "[]");
-
-    quests.push({ title, desc, rarity, prize });
-
-    localStorage.setItem("quests", JSON.stringify(quests));
-
-    loadQuests();
+function completeDaily(index) {
+    document.getElementById("collect" + index).style.display = "block";
 }
 
-loadDailyQuests();
-loadQuests();
-</script>
+function rejectDaily(index) {
+    let quests = JSON.parse(localStorage.getItem("dailyQuests"));
+    quests.splice(index, 1);
+    localStorage.setItem("dailyQuests", JSON.stringify(quests));
+    loadDailyQuests();
+}
 
-</body>
-</html>
+function collectReward(index) {
+    let quests = JSON.parse(localStorage.getItem("dailyQuests"));
+    let xp = parseInt(localStorage.getItem("xp") || "0");
+
+    xp += quests[index].prize;
+    localStorage.setItem("xp", xp);
+
+    // Move quest to progress
+    let progress = JSON.parse(localStorage.getItem("progress") || "[]");
+    progress.push(quests[index]);
+    localStorage.setItem("progress", JSON.stringify(progress));
+
+    // Remove quest from daily list
+    quests.splice(index, 1);
+    localStorage.setItem("dailyQuests", JSON.stringify(quests));
+
+    alert("Reward collected! +" + quests[index]?.prize + " XP");
+
+    loadDailyQuests();
+}
+
 
