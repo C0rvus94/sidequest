@@ -48,16 +48,9 @@
         outline: none;
     }
 
-    input:focus {
-        box-shadow: 0 0 15px #1e90ff;
-    }
-
     .file-input {
-        border: none;
-        background: none;
+        margin-top: 10px;
         color: #7ab8ff;
-        font-size: 18px;
-        margin-top: 5px;
     }
 
     .btn {
@@ -71,6 +64,7 @@
         font-size: 22px;
         font-weight: 600;
         text-decoration: none;
+        cursor: pointer;
         transition: 0.2s;
         box-shadow: 0 0 15px #1e90ff;
     }
@@ -80,22 +74,6 @@
         transform: scale(1.05);
         box-shadow: 0 0 25px #4aa3ff;
     }
-
-    .login-link {
-        margin-top: 15px;
-        font-size: 18px;
-        opacity: 0.8;
-    }
-
-    .login-link a {
-        color: #7ab8ff;
-        text-decoration: none;
-        font-weight: 600;
-    }
-
-    .login-link a:hover {
-        text-shadow: 0 0 10px #1e90ff;
-    }
 </style>
 </head>
 <body>
@@ -103,20 +81,36 @@
 <h1>SIGN UP</h1>
 
 <div class="signup-box">
-    <input type="text" placeholder="First Name">
-    <input type="text" placeholder="Username">
-    <input type="password" placeholder="Password">
+    <input id="firstName" type="text" placeholder="First Name">
+    <input id="username" type="text" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
 
-    <label style="margin-top: 10px; font-size: 18px;">Profile Picture:</label>
-    <input class="file-input" type="file" accept="image/*">
+    <label style="font-size: 18px;">Profile Picture:</label>
+    <input id="pfp" class="file-input" type="file" accept="image/*">
 
-    <a class="btn" href="login.html">Create Account</a>
-
-    <div class="login-link">
-        Already have an account?  
-        <a href="login.html">Log In</a>
-    </div>
+    <button class="btn" onclick="createAccount()">Create Account</button>
 </div>
+
+<script>
+function createAccount() {
+    const firstName = document.getElementById("firstName").value;
+    const pfpFile = document.getElementById("pfp").files[0];
+
+    if (!firstName || !pfpFile) {
+        alert("Please enter your first name and choose a profile picture.");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        localStorage.setItem("firstName", firstName);
+        localStorage.setItem("pfp", e.target.result);
+        window.location.href = "start.html";
+    };
+    reader.readAsDataURL(pfpFile);
+}
+</script>
 
 </body>
 </html>
+
