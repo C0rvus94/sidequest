@@ -1,67 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>SideQuest</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: #0d0d0d;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
-        }
+<meta charset="UTF-8">
+<title>SideQuest Status</title>
 
-        h1 {
-            font-size: 60px;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
+<!-- Rajdhani font -->
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-        p {
-            font-size: 22px;
-            opacity: 0.8;
-            max-width: 600px;
-        }
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #05070a;
+        font-family: 'Rajdhani', sans-serif;
+        color: #d7e9ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-        .buttons {
-            margin-top: 40px;
-            display: flex;
-            gap: 20px;
-        }
+    .panel {
+        width: 420px;
+        padding: 25px;
+        background: rgba(10, 15, 25, 0.85);
+        border: 2px solid #1e90ff;
+        border-radius: 12px;
+        box-shadow: 0 0 25px #1e90ff;
+    }
 
-        .btn {
-            padding: 14px 28px;
-            background: #4a4aff;
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-size: 18px;
-            transition: 0.2s;
-        }
+    h2 {
+        text-align: center;
+        font-size: 34px;
+        margin-bottom: 10px;
+        color: #7ab8ff;
+        letter-spacing: 1px;
+        font-weight: 700;
+    }
 
-        .btn:hover {
-            background: #6a6aff;
-            transform: scale(1.05);
-        }
-    </style>
+    .row {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .label {
+        color: #9bbce8;
+    }
+
+    .value {
+        color: #ffffff;
+        font-weight: 700;
+    }
+
+    .bar-container {
+        width: 100%;
+        background: #1a1f2b;
+        border-radius: 6px;
+        margin-top: 5px;
+        height: 18px;
+        overflow: hidden;
+    }
+
+    .bar {
+        height: 100%;
+    }
+
+    .hp { background: #ff4d4d; }
+    .mp { background: #4d7dff; }
+</style>
 </head>
 <body>
-    <h1>SideQuest</h1>
-    <p>Your personal quest hub. Track goals, complete challenges, and level up your life.</p>
 
-    <div class="buttons">
-        <a class="btn" href="#">Start</a>
-        <a class="btn" href="#">Quests</a>
-        <a class="btn" href="#">Profile</a>
-    </div>
-</body>
-</html>
+<div class="panel">
+    <h2>STATUS</h2>
 
+    <div class="row"><span class="label">LEVEL</span><span class="value">18</span></div>
+    <div class="row"><span class="label">JOB</span><span class="value">None</span></div>
+    <div class="row"><span class="label">TITLE</span><span class="value">Wolf Assassin</span></div>
+
+    <br>
+
+    <div class="label">HP 2220 / 2220</div>
+    <div class="bar-container"><div class="bar hp" style="width:100%"></div></div>
+
+    <div class="label" style="margin-top:10px;">MP 350 / 350</div>
+    <div class="bar-container"><div class="bar mp" style="width:100%"></div></div>
+
+    <br>
+
+    <div class="row"><span class="label">STR</span><span class="value">48</span></div>
+    <div class="row"><span class="label">AGI</span><span class="value">27</span></div>
+    <div class="row"><span class="label">PER</span><span class="value">27</span></div>
+    <div class="row"><span class="label">VIT</span><span class="value">27</span></div>
+    <div class="row"><span class="label">
 
