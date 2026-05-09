@@ -76,12 +76,19 @@
 </div>
 
 <script>
+    // Load saved data
     const name = localStorage.getItem("firstName");
     const pfp = localStorage.getItem("pfp");
 
     document.getElementById("welcomeText").innerText = "Welcome, " + name;
     document.getElementById("pfpImage").src = pfp;
+
+    // After 3 seconds, go to home screen
+    setTimeout(() => {
+        window.location.href = "home.html";
+    }, 3000); // 3000ms = 3 seconds
 </script>
 
 </body>
 </html>
+
