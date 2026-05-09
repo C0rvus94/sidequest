@@ -16,6 +16,7 @@
         display: flex;
     }
 
+    /* SIDEBAR */
     .sidebar {
         width: 230px;
         height: 100vh;
@@ -32,6 +33,7 @@
         text-align: center;
         color: #7ab8ff;
         margin-bottom: 40px;
+        text-shadow: 0 0 15px #1e90ff;
     }
 
     .nav-btn {
@@ -52,6 +54,7 @@
         transform: scale(1.05);
     }
 
+    /* MAIN CONTENT */
     .content {
         margin-left: 260px;
         padding: 60px;
@@ -91,7 +94,7 @@
         border: 3px solid #1e90ff;
     }
 
-    .quest-box, .xp-box {
+    .box {
         margin-top: 25px;
         padding: 20px;
         width: 400px;
@@ -124,7 +127,8 @@
 
 <div class="sidebar">
     <h2>MENU</h2>
-    <a class="nav-btn" href="home.html">SideQuest</a>
+    <a class="nav-btn" href="home.html">Home</a>
+    <a class="nav-btn" href="sidequest.html">SideQuest</a>
     <a class="nav-btn" href="progress.html">Progress</a>
     <a class="nav-btn" href="upgrades.html">Upgrades</a>
     <a class="nav-btn" href="social.html">Social</a>
@@ -139,12 +143,12 @@
 
     <h1 id="welcomeName"></h1>
 
-    <div class="quest-box">
+    <div class="box">
         <h2>Current Quest</h2>
         <p id="currentQuest"></p>
     </div>
 
-    <div class="xp-box">
+    <div class="box">
         <h2>XP</h2>
         <div class="xp-bar">
             <div id="xpFill"></div>
@@ -170,5 +174,6 @@
 
 </body>
 </html>
+
 
 
